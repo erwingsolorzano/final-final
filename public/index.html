@@ -3,13 +3,94 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <title>Seminario Nodejs+MongoDB</title>
-        <script src="../network/routes.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            $( document ).ready(function() {
+                var aux = ""
+                var ur = ""
+                $("#obtenera").click(function(){
+                    console.log("boton alumnos clickeado");
+                    aux="#obtenera";
+                    ur = "estudiante";
+                    var settings ={
+                    "url":"https://esolorzanoheroku.herokuapp.com/"+ur,
+                    "method": "GET",
+                    "timeout": 0,
+                };
+                $.ajax(settings).then(value => {
+                $("#liTags").empty();
+                var sub_ul= $('<div/>');
+                
+                $.each(value, function(index, value){
+                    
+                    var sub_li = $('<pre/>').text(JSON.stringify(value, null, 2));
+                    sub_ul.append(sub_li);
+                });
+                    $("#liTags").append(sub_ul);
+                    
+            })
+                })
+                $("#obtenerc").click(function(){
+                    console.log("boton carrera clickeado");
+                    aux="#obtenerc";
+                    ur = "carrera";
+                    var settings ={
+                    "url":"https://esolorzanoheroku.herokuapp.com/"+ur,
+                    "method": "GET",
+                    "timeout": 0,
+                };
+                $.ajax(settings).then(value => {
+                $("#liTags").empty();
+                var sub_ul= $('<div/>');
+                
+                $.each(value, function(index, value){
+                    
+                    var sub_li = $('<pre/>').text(JSON.stringify(value, null, 2));
+                    sub_ul.append(sub_li);
+                });
+                    $("#liTags").append(sub_ul);
+                    
+            })
+                })
+                $("#obtenerd").click(function(){
+                    console.log("boton docente clickeado");
+                    aux="#obtenerd";
+                    ur = "docente";
+                    var settings ={
+                    "url":"https://esolorzanoheroku.herokuapp.com/"+ur,
+                    "method": "GET",
+                    "timeout": 0,
+                };
+                $.ajax(settings).then(value => {
+                $("#liTags").empty();
+                var sub_ul= $('<div/>');
+                
+                $.each(value, function(index, value){
+                    
+                    var sub_li = $('<pre/>').text(JSON.stringify(value, null, 2));
+                    sub_ul.append(sub_li);
+                });
+                    $("#liTags").append(sub_ul);
+                    
+            })
+                })
+                    
+                
+        });
+        </script>
+        
     </head>
     <body>
         <h1>Node.js + MongoDB</h1>
         <h2>Erwing Paúl Solorzano</h2>
-        <a href="/carrera">GET carreras</a><br>
-        <a href="/docente">GET docentes</a><br>
-        <a href="/estudiante">GET estudiantes</a>
+        
+        <button id="obtenerc">Obtener Carreras</button>
+        <button id="obtenerd">Obtener Docentes</button>
+        <button id="obtenera">Obtener Estudiantes</button>
+        <li id="liTags"></li>
+    
+    
+        
+
     </body>
 </html>
